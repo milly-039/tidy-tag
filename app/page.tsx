@@ -28,7 +28,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-4xl">
+              <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-4xl">
                 <div className="flex flex-col items-center p-6 premium-card rounded-xl">
                   <div className="p-3 rounded-full bg-primary/10 mb-4">
                     <Shirt className="h-6 w-6 text-primary" />
