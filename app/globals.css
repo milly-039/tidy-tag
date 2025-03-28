@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body {
+  height: 100%;
+  min-height: 120vh;
+  overflow-y: auto;
+}
+
+@layer base {
+  :root {
+    --background: 210 33% 99%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 215 60% 35%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 48 43% 64%;
+    --accent-foreground: 222 47% 11.2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 60% 35%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 215 60% 35%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 48 43% 64%;
+    --accent-foreground: 222 47% 11.2%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 215 60% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+.status-badge-processing {
+  @apply bg-laundry-info text-white;
+}
+
+.status-badge-ready {
+  @apply bg-laundry-success text-white;
+}
+
+.status-badge-completed {
+  @apply bg-laundry-blue text-white;
+}
+
+.status-badge-pending {
+  @apply bg-laundry-warning text-white;
+}
+
+.premium-card {
+  @apply bg-card border border-border/40 shadow-premium transition-all duration-300;
+}
+
+.premium-card:hover {
+  @apply shadow-premium-hover border-border/60;
+}
+
+.premium-input {
+  @apply bg-background border-input focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all duration-200;
+}
+
+.premium-button {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200;
+}
+
+.premium-button-outline {
+  @apply border border-input bg-background hover:bg-accent/10 hover:text-accent-foreground transition-all duration-200;
+}
+
+.premium-button-accent {
+  @apply bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-200;
+}
+
+.premium-section {
+  @apply bg-background border border-border/40 rounded-lg p-6 shadow-sm;
+}
+
+.subtle-bg {
+  @apply bg-gradient-to-b from-background to-muted/30;
+}
+
