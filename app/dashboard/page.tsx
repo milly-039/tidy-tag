@@ -286,7 +286,7 @@ export default function DashboardPage() {
   }
 
   // Simulate progress update
-  useEffect(() => {
+  {/*useEffect(() => {
     if (!currentOrder || !currentOrder.id) return
 
     const timer = setInterval(async () => {
@@ -318,7 +318,7 @@ export default function DashboardPage() {
     return () => {
       clearInterval(timer)
     }
-  }, [currentOrder, progress, toast])
+  }, [currentOrder, progress, toast])*/}
 
   // View order details
   const viewOrderDetails = (order: LaundryOrder) => {
@@ -769,10 +769,7 @@ export default function DashboardPage() {
                       </div>
                     </div>
 
-                    <Button variant="outline" className="w-full premium-button-outline">
-                      <MessageSquare className="h-4 w-4 mr-2" />
-                      Start Live Chat
-                    </Button>
+                    
                   </CardContent>
                 </Card>
               </div>

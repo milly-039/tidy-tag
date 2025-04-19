@@ -236,12 +236,6 @@ export default function ManageOrderPage() {
                   </div>
                 )}
 
-                {order.cost !== undefined && (
-                  <div className="flex justify-between">
-                    <span className="font-medium">Cost:</span>
-                    <span>${order.cost.toFixed(2)}</span>
-                  </div>
-                )}
 
                 {order.progress !== undefined && (
                   <div className="space-y-2">

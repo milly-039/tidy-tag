@@ -51,7 +51,7 @@ export default function NewOrderPage() {
   const [formData, setFormData] = useState({
     status: "pending",
     notes: "",
-    cost: 0,
+    
     bagCode: "", // Add this new field
   })
 
@@ -105,7 +105,7 @@ export default function NewOrderPage() {
     const { id, value } = e.target
     setFormData((prev) => ({
       ...prev,
-      [id]: id === "cost" ? Number(value) : value,
+      [id]: value,
     }))
   }
 
@@ -402,19 +402,7 @@ export default function NewOrderPage() {
                       </Select>
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="cost">Cost ($)</Label>
-                      <Input
-                        id="cost"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        className="premium-input"
-                        value={formData.cost}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
+                  
                   </div>
 
                   <div className="space-y-2">
@@ -508,9 +496,7 @@ export default function NewOrderPage() {
                 <p className="mt-2">
                   <span className="font-medium">Status:</span> {formData.status}
                 </p>
-                <p>
-                  <span className="font-medium">Cost:</span> ${formData.cost}
-                </p>
+                
                 <p>
                   <span className="font-medium">Bag Code:</span> {formData.bagCode || "Not set"}
                 </p>

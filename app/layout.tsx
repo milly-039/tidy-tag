@@ -16,6 +16,7 @@ const fontSans = FontSans({
 const fontSerif = FontSerif({
   subsets: ["latin"],
   variable: "--font-serif",
+  weight:'400',
 })
 
 const fontDisplay = FontDisplay({
