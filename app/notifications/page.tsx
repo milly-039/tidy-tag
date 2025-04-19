@@ -142,7 +142,7 @@ export default function NotificationsPage() {
         </div>
       </main>
 
-      
+      <MobileNav activeTab="notifications" />
     </div>
   )
 }

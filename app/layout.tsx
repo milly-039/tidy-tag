@@ -5,19 +5,18 @@ import { Young_Serif as FontSerif } from "next/font/google"
 import { Funnel_Display as FontDisplay } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider"
+import { AuthProvider } from "@/lib/auth-context"
+import { Toaster } from "@/components/ui/toaster"
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
+
 const fontSerif = FontSerif({
   subsets: ["latin"],
-  weight: "400", // ✅ Explicitly set the available weight
   variable: "--font-serif",
 })
-
-
-
 
 const fontDisplay = FontDisplay({
   subsets: ["latin"],
@@ -40,17 +39,16 @@ export default function RootLayout({
           fontDisplay.variable,
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )
 }
-
-
-
-import './globals.css'
 
 export const metadata = {
       generator: 'v0.dev'

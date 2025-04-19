@@ -11,10 +11,10 @@ export default function Home() {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2 max-w-3xl">
                 <div className="inline-block rounded-full bg-accent/20 px-3 py-1 text-sm text-laundry-navy">
-                  <span>Campus Laundry Service</span>
+                  <span>Smart Laundry Management</span>
                 </div>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-laundry-navy">
-                  Campus Laundry
+                  Tidy Tag
                 </h1>
                 <p className="mx-auto max-w-[700px] text-laundry-slate md:text-xl">
                   Manage your laundry with ease. Track status, get notifications, and never lose your clothes again.
@@ -28,7 +28,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-4xl">
+              <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-4xl">
                 <div className="flex flex-col items-center p-6 premium-card rounded-xl">
                   <div className="p-3 rounded-full bg-primary/10 mb-4">
                     <Shirt className="h-6 w-6 text-primary" />

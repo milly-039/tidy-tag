@@ -13,11 +13,17 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MobileNav } from "@/components/mobile-nav"
 import { useToast } from "@/hooks/use-toast"
+import { useAuth } from "@/lib/auth-context"
+import { reportLostItem } from "@/lib/lost-found-service"
+import { useRouter } from "next/navigation"
 
 export default function ReportLostItemPage() {
   const { toast } = useToast()
+  const { user, loading } = useAuth()
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [imageFile, setImageFile] = useState<File | null>(null)
   const [formData, setFormData] = useState({
     itemType: "",
     color: "",
@@ -27,6 +33,12 @@ export default function ReportLostItemPage() {
     orderId: "",
   })
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Redirect if not logged in
+  if (!loading && !user) {
+    router.push("/login")
+    return null
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
@@ -49,6 +61,8 @@ export default function ReportLostItemPage() {
         return
       }
 
+      setImageFile(file)
+
       const reader = new FileReader()
       reader.onloadend = () => {
         setImagePreview(reader.result as string)
@@ -63,22 +77,48 @@ export default function ReportLostItemPage() {
 
   const removeImage = () => {
     setImagePreview(null)
+    setImageFile(null)
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Modify the handleSubmit function to handle permission errors
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!user) {
+      toast({
+        title: "Error",
+        description: "You must be logged in to report a lost item.",
+        variant: "destructive",
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      toast({
-        title: "Report Submitted",
-        description: "Your lost item report has been submitted successfully!",
-      })
+    try {
+      try {
+        await reportLostItem(
+          {
+            ...formData,
+            reportedBy: user.uid,
+          },
+          imageFile || undefined,
+        )
+
+        toast({
+          title: "Report Submitted",
+          description: "Your lost item report has been submitted successfully!",
+        })
+      } catch (firestoreError) {
+        console.error("Error accessing Firestore:", firestoreError)
+        toast({
+          title: "Demo Mode",
+          description: "This is a preview. In production, your report would be saved to the database.",
+        })
+      }
 
       // Reset form
       setFormData({
@@ -90,10 +130,32 @@ export default function ReportLostItemPage() {
         orderId: "",
       })
       setImagePreview(null)
+      setImageFile(null)
 
       // Redirect to dashboard after successful submission
-      window.location.href = "/dashboard?tab=lost-found"
-    }, 1500)
+      router.push("/dashboard?tab=lost-found")
+    } catch (error) {
+      console.error("Error reporting lost item:", error)
+      toast({
+        title: "Error",
+        description: "Failed to submit report. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // If loading, show loading state
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -265,7 +327,7 @@ export default function ReportLostItemPage() {
         </div>
       </main>
 
-      
+      <MobileNav activeTab="lost-found" />
     </div>
   )
 }
