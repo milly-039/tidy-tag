@@ -288,7 +288,7 @@ export default function AdminPage() {
       <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8 subtle-bg">
         <div className="mx-auto max-w-7xl">
           <Tabs defaultValue={activeTab} value={activeTab} className="w-full" onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="grid w-full grid-cols-4 mb-6">
               <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
               <TabsTrigger value="orders">Orders</TabsTrigger>
               <TabsTrigger value="lost-found">Lost & Found</TabsTrigger>
